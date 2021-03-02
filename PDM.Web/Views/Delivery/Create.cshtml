@@ -1,0 +1,180 @@
+﻿@model PDM.Model.Delivery
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var visibleCount = 0;
+    var dateFormat = PDM.Helper.ConfigurationKeys.DateFormat;
+}
+
+
+
+<!-- Page Header -->
+<div class="py-4">
+</div>
+<!-- End Page Header -->
+@using (Html.BeginForm("Create", "Delivery", FormMethod.Post, new { @id = "formCreateDelivery", @autocomplete = "off" }))
+{
+    <input type="hidden" value="@Model.DeliveryId" name="DeliveryId" />
+    <input type="hidden" value="@Model.OrderId" name="OrderId" />
+    <input type="hidden" value="@Model.CustomerId" name="CustomerId" />
+    <input type="hidden" value="@Model.CreatedBy" name="CreatedBy" />
+    <input type="hidden" value="@Model.CreatedOn" name="CreatedOn" />
+    <!-- Start Delivery List-->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-body p-10 pb-3">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 pad-8">
+                            <div class="lbl-caption">@PDM.Services.ResourceService.Resource.GetCaption("OrderId")</div>
+                            <div class="lbl-value">: <span class="pad-left15">@Model.OrderId</span></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="lbl-caption pad-8">@PDM.Services.ResourceService.Resource.GetCaption("Tags")</div>
+                            <div class="lbl-value">: <span class="pad-left15">@Html.DropDownListFor(m => m.PickupTypeId, (List<SelectListItem>)Model.PickupTypes, Html.DisplayNameFor(m => m.PickupTypeId), new { @class = "w-50 dd" })</span></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 pad-8">
+                            <div class="lbl-caption">@PDM.Services.ResourceService.Resource.GetCaption("PatientName")</div>
+                            <div class="lbl-value">: <span class="pad-left15">@($"{Model.Customer.FirstName} {Model.Customer.LastName}")</span></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 pad-8">
+                            <div class="lbl-caption">@PDM.Services.ResourceService.Resource.GetCaption("PatientId")</div>
+                            <div class="lbl-value">
+                                :
+                                <span class="pad-left15">@Model.Customer.CustomerId</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="specer-01"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 pad-8">
+                            <div class="lbl-caption">@PDM.Services.ResourceService.Resource.GetCaption("Email")</div>
+                            <div class="lbl-value">: <span class="pad-left15">@Model.Customer.Email</span></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 pad-8">
+                            <div class="lbl-caption">@PDM.Services.ResourceService.Resource.GetCaption("PhoneNumber")</div>
+                            <div class="lbl-value">
+                                :
+                                <span class="pad-left15">@Model.Customer.Mobile</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="specer-01"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 pad-8">
+                            <div class="lbl-caption">@PDM.Services.ResourceService.Resource.GetCaption("DateOfBirth")</div>
+                            <div class="lbl-value">
+                                : <span class="pad-left15">
+                                    @Model.Customer.Dob.ToString(dateFormat)
+                                </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="lbl-caption pad-8">@PDM.Services.ResourceService.Resource.GetCaption("DeliveryType")</div>
+                            <div class="lbl-value">
+                                :
+                                <span class="pad-left15">
+                                    @Html.DropDownListFor(m => m.DeliveryTypeId, (List<SelectListItem>)Model.DeliveryTypes, Html.DisplayNameFor(m => m.DeliveryTypeId), new { @class = "w-50 dd" })
+                                </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="specer"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="lbl-caption pad-8">@PDM.Services.ResourceService.Resource.GetCaption("Storage")</div>
+                            <div class="lbl-value">
+                                : <span class="pad-left15">
+                                    @Html.DropDownListFor(m => m.StorageId, (List<SelectListItem>)Model.Storages, Html.DisplayNameFor(m => m.StorageId), new { @class = "w-50 dd" })
+                                </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="lbl-caption pad-8">@PDM.Services.ResourceService.Resource.GetCaption("Location")</div>
+                            <div class="lbl-value">
+                                :
+                                <span class="pad-left15">
+                                    @Html.TextBoxFor(m => m.RackNo, new { @class = "w-50 txtbox", placeholder = Html.DisplayNameFor(m => m.RackNo), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.RackNo) + "'" })
+                                </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="specer"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="w-100">
+                                <div class="lbl-caption pad-8">@PDM.Services.ResourceService.Resource.GetCaption("DeliveryDate")</div>
+                                <div class="lbl-value">
+                                    : <span class="pad-left15">
+                                        @{
+                                            var deliveryDate = string.Empty;
+                                            if (Model.InputDeliveryDate.HasValue)
+                                            {
+                                                deliveryDate = Model.InputDeliveryDate.Value.ToString(dateFormat);
+                                            }
+                                        }
+                                        @Html.TextBoxFor(m => m.InputDeliveryDate, "{0:" + dateFormat + "}", new { @value = deliveryDate, @class = "w-50 txtbox datepicker2 datepicker-img", @placeholder = Html.DisplayNameFor(m => m.InputDeliveryDate), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.InputDeliveryDate) + "'" })
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="specer"></div>
+                            <div class="w-100">
+                                <div class="lbl-caption pad-8">@PDM.Services.ResourceService.Resource.GetCaption("Address")</div>
+                                <div class="lbl-value">
+                                    : <span class="pad-left15">
+                                        @($"{Model.Customer.Address.Address1}, {Model.Customer.Address.Address2} {Model.Customer.Address.City},{Model.Customer.Address.CountryName} {Model.Customer.Address.PostCode}")
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            
+                        </div>
+                        <div class="specer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="float-l">
+                <input type="button" id="btnBeforeCreate" class="btn-purple" value="Create" data-toggle="modal" data-target="#modelDelivery">
+            </div>
+            <div class="specer-btn float-l"></div>
+            <div class="float-l"><input type="button" class="btn-white" value="Reset"></div>
+        </div>
+        <div class="specer"></div>
+        <div class="modal fade" id="modelDelivery" tabindex="-1" role="dialog" aria-labelledby="ModalPopLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body center">
+                        <div style="font-size:20px; font-weight:bold;">@PDM.Services.ResourceService.Resource.GetCaption("CreateDelivery").ToUpper()</div>
+                        <div>@PDM.Services.ResourceService.Resource.GetMessage("CmDoCreateDelivery")</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSubmit" class="btn-purple" value="Create" Name="Command">Ok</button>
+                        <button type="button" class="btn-white" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Delivery List -->
+    <script>
+        $(document).ready(function () {
+
+        });
+        $(function () {
+            $("#btnBeforeCreate").click(function () {
+                if ($("#formCreateDelivery").valid() == false) return false;
+                $("#modelDelivery").modal("show");
+            });
+        });
+    </script>
+
+}

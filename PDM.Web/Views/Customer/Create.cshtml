@@ -1,0 +1,291 @@
+﻿@using PDM.Services
+
+
+@model PDM.Model.CustomerModel
+@inject ICustomerService customerService
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var dateFormat = PDM.Helper.ConfigurationKeys.DateFormat;
+
+}
+
+@{
+    string pageCaption = (Model.CustomerId > 0) ? $"{PDM.Services.ResourceService.Resource.GetCaption("Edit")} {PDM.Services.ResourceService.Resource.GetCaption("Customer")}"
+    : $"{PDM.Services.ResourceService.Resource.GetCaption("New")} {PDM.Services.ResourceService.Resource.GetCaption("Customer")}";
+    <!-- Page Header -->
+    <div class="py-4">
+    </div>
+    <!-- End Page Header -->
+    @using (Html.BeginForm("Create", "Customer", FormMethod.Post, new { @id = "formCreateCustomer", enctype = "multipart/form-data", @autocomplete = "off" }))
+    {
+        <input type="hidden" value="@Model.CustomerId" name="CustomerId" />
+        <input type="hidden" value="@Model.CompanyId" name="CompanyId" />
+        <input type="hidden" value="@Model.BranchId" name="BranchId" />
+        <input type="hidden" value="@Model.AddressId" name="AddressId" />
+        <input type="hidden" value="@Model.IsActive" name="IsActive" />
+        <input type="hidden" value="@Model.CreatedBy" name="CreatedBy" />
+        <input type="hidden" value="@Model.CreatedOn" name="CreatedOn" />
+        <input type="hidden" value="@Model.OldNHSNumber" name="OldNHSNumber" />
+        <input type="hidden" value="@Model.OldMobile" name="OldMobile" />
+        <input type="hidden" value="@Model.OldEmail" name="OldEmail" />
+        <input type="hidden" value="@Model.IsApproved" name="IsApproved" />
+        <div class="modal fade" id="modelValidation" tabindex="-1" role="dialog" aria-labelledby="ModalPopLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body center">
+                        <div>
+                            @if (ViewBag.Message != null)
+                            {
+                                @Html.Raw(ViewBag.Message);
+                            }
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-white" data-dismiss="modal">@PDM.Services.ResourceService.Resource.GetCaption("Ok")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Start Customer Add-->
+        <div class="row">
+            <div class="col">
+                <div class="card card-small mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 bold">@PDM.Services.ResourceService.Resource.GetCaption("CustomerDetail")</h6>
+                    </div>
+                    <div class="card-body p-10 pb-3">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                @Html.DropDownListFor(m => m.Title, customerService.GetTitleList(), new { @class = "w-100 dd" })
+
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "w-100 txtbox required-field", placeholder = Html.DisplayNameFor(m => m.FirstName), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.FirstName) + "'" })
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                @Html.TextBoxFor(m => m.MiddleName, new { @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.MiddleName), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.MiddleName) + "'" })
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "w-100 txtbox required-field", placeholder = Html.DisplayNameFor(m => m.LastName), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.LastName) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.NHSNumber, new { @class = "w-100 txtbox required-field", placeholder = Html.DisplayNameFor(m => m.NHSNumber), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.NHSNumber) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.Mobile, new { data_val = false, @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Mobile), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Mobile) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @{
+                                    var dateOfBirth = string.Empty;
+                                    if (Model.InputDob.HasValue)
+                                    {
+                                        dateOfBirth = Model.InputDob.Value.ToString(dateFormat);
+                                    }
+                                }
+                                @Html.TextBoxFor(m => m.InputDob, "{0:" + dateFormat + "}", new { @value = dateOfBirth, @class = "w -100 txtbox datepicker2 datepicker-img required-field", @placeholder = Html.DisplayNameFor(m => m.InputDob), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.InputDob) + "'" })
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
+                                            {
+                                 new SelectListItem{Text="Male", Value="M"},
+                                 new SelectListItem{Text="Female", Value="F"},
+                            }, new { @class = "w-100 dd" })
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.AlternativeContact, new { @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.AlternativeContact), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.AlternativeContact) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.LandlineNumber, new { @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.LandlineNumber), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.LandlineNumber) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.DependentContactNumber, new { @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.DependentContactNumber), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.DependentContactNumber) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.Email, new { data_val = false, @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Email), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Email) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.DropDownListFor(m => m.Address.PreferredContactType, (List<SelectListItem>)ViewBag.PreferredContactTypes, Html.DisplayNameFor(m => m.Address.PreferredContactType), new { @class = "w-100 dd" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.DropDownListFor(m => m.PickupTypeId, (List<SelectListItem>)ViewBag.PickupTypes, Html.DisplayNameFor(m => m.PickupTypeId), new { @class = "w-100 dd required-field" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @{
+                                    var reminderDate = string.Empty;
+                                    if (Model.ReminderDate.HasValue)
+                                    {
+                                        reminderDate = Model.ReminderDate.Value.ToString(dateFormat);
+                                    }
+                                }
+                                @Html.TextBoxFor(m => m.ReminderDate, "{0:" + dateFormat + "}", new { @value = reminderDate, @class = "w -100 txtbox datepicker3 datepicker-img", @placeholder = Html.DisplayNameFor(m => m.ReminderDate), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.ReminderDate) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.DropDownListFor(m => m.CaseTypeId, (List<SelectListItem>)ViewBag.CaseTypes, Html.DisplayNameFor(m => m.CaseTypeId), new { @class = "w-100 dd" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12"></div>
+                            <div class="specer"></div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h6 class="m-0 bold">@PDM.Services.ResourceService.Resource.GetCaption("Address")</h6>
+                    </div>
+                    <div class="card-body p-10 pb-3">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.TextBoxFor(m => m.Address.Address1, new { @class = "w-100 txtbox required-field", placeholder = Html.DisplayNameFor(m => m.Address.Address1), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Address.Address1) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.Address.Address2, new { @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Address.Address2), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Address.Address2) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.TextBoxFor(m => m.Address.City, new { @class = "w-100 txtbox required-field", placeholder = Html.DisplayNameFor(m => m.Address.City), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Address.City) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.DropDownListFor(m => m.Address.CountryId, (List<SelectListItem>)ViewBag.Countries, Html.DisplayNameFor(m => m.Address.CountryId), new { @class = "w-100 dd required-field" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.TextBoxFor(m => m.Address.PostCode, new { @class = "w-100 txtbox required-field", placeholder = Html.DisplayNameFor(m => m.Address.PostCode), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Address.PostCode) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.DropDownListFor(m => m.RouteId, (List<SelectListItem>)ViewBag.Routes, PDM.Services.ResourceService.Resource.GetCaption("SelectRoute"), new { @class = "w-100 dd" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h6 class="m-0 bold">@PDM.Services.ResourceService.Resource.GetCaption("SurgeryDetail")</h6>
+                    </div>
+                    <div class="card-body p-10 pb-3">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.DropDownListFor(m => m.SurgeryId, (List<SelectListItem>)ViewBag.Surgeries, PDM.Services.ResourceService.Resource.GetCaption("SelectSurgery"), new { @class = "w-100 dd required-field", @id = "ddlSurgery" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.DropDownListFor(m => m.PaymentExemption, (List<SelectListItem>)ViewBag.PaymentExemptions, PDM.Services.ResourceService.Resource.GetCaption("SelectPayExemption"), new { @class = "w-100 dd required-field" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.SurgeryEmail, new { @readonly = "readonly", @id = "txtSurEmail", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.SurgeryEmail), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.SurgeryEmail) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextAreaFor(m => m.DeliveryNote, new { @rows = "2", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.DeliveryNote), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.DeliveryNote) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.SurgeryMobile, new { @readonly = "readonly", @id = "txtSurMobile", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.SurgeryMobile), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.SurgeryMobile) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextAreaFor(m => m.SurgeryNote, new { @rows = "2", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.SurgeryNote), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.SurgeryNote) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @*@Html.TextBoxFor(m => m.SurgeryMobile, new { @readonly = "readonly", @id = "txtSurMobile", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.SurgeryMobile), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.SurgeryMobile) + "'" })*@
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextAreaFor(m => m.BranchNote, new { @rows = "2", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.BranchNote), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.BranchNote) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div style="display: none;">
+                                    @Html.EditorFor(m => m.Documents, new { @class = "file-upload-input" })
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 upload-box">
+                                    <div class="float-l"><img src="~/images/doc-upload.jpg"></div>
+                                    <div class="float-l upload-box-r">
+                                        @PDM.Services.ResourceService.Resource.GetCaption("CustomerUpload")
+                                        <span id="selfiles"></span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="float-l"><i class="material-icons ico-md">pin_drop</i></div>
+                                <div class="specer-btn float-l"></div>
+                                <div class="float-l"><input type="button" class="btn-green" value="@PDM.Services.ResourceService.Resource.GetCaption("ViewMap")"></div>
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="float-l">
+                                    <button type="button" id="btnBeforeSubmit" class="btn-purple" value="Login" Name="Command">@PDM.Services.ResourceService.Resource.GetCaption("Submit")</button>
+                                    <button type="submit" id="btnSubmit" class="btn-purple" value="Login" Name="Command" hidden="hidden">@PDM.Services.ResourceService.Resource.GetCaption("Submit")</button>
+                                </div>
+                                <div class="specer-btn float-l"></div>
+                                <div class="float-l"><input type="button" class="btn-white" onclick="window.history.back();" value="@PDM.Services.ResourceService.Resource.GetCaption("Cancel")"></div>
+                            </div>
+                            <div class="specer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Customer  -->
+        @section Scripts{
+            <script>
+                $(document).ready(function () {
+                    var showError = "@Model.ShowValidationMsg";
+                    if (showError == "True") {
+                        $("#modelValidation").modal("show");
+                    }
+                    $("#divPageTitle").text("@pageCaption");
+                    $('.upload-box').on("click", function () {
+                        $("#Documents").click();
+                    });
+
+                    $('#Documents').on("change", function () {
+                        var fileLabel = $('#selfiles');
+                        var fileName = $(this).val().split("\\").pop();
+                        var files = $(this)[0].files;
+                        fileLabel.html(fileName);
+                    });
+                });
+                $(function () {
+                    $('#ddlSurgery').change(function () {
+                        var value = $("#ddlSurgery :selected").val();
+                        if (value != "") {
+                            var valueList = value.split('$');
+                            if (valueList.length > 0) {
+                                $("#txtSurEmail").val(valueList[1]);
+                                $("#txtSurMobile").val(valueList[2]);
+                            }
+                        }
+                    });
+
+                    $("#btnBeforeSubmit").click(function () {
+                        if ($("#formCreateCustomer").valid() == false) return false;
+                        var objTag = $("#PickupTypeId");
+                        var objRoute = $("#RouteId");
+                        //Tag(2) - Delivery
+                        if (objTag != null && objTag.val() == 2 && objRoute.val() == "") {
+                            objRoute.focus();
+                            return;
+                        }
+                        $("#btnSubmit").click();
+                    });
+                });
+            </script>
+
+        }
+    }
+}
+<script>
+
+</script>

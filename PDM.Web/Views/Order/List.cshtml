@@ -1,0 +1,100 @@
+﻿@inject PDM.Services.IOrderService orderService
+@{
+    ViewData["Title"] = "Order List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var yesCap = PDM.Services.ResourceService.Resource.GetCaption("Yes");
+    var noCap = PDM.Services.ResourceService.Resource.GetCaption("No");
+    var dateFormat = PDM.Helper.ConfigurationKeys.DateFormat;
+}
+
+@{
+    if (!orderService.IsOrderExist())
+    {
+        <!-- Page Header -->
+        <div class="py-4">
+        </div>
+        <!-- End Page Header -->
+
+        <!-- Start Delivery List-->
+        <div class="row">
+            <div class="col-lg-4 col-md-10 col-sm-12 margin-c">
+                <div class="card card-small h-100 pad-50">
+                    <div class="w-100 center"><img src="~/images/add-customer.jpg"></div>
+                    <div class="w-100 center pad-10">
+                        @PDM.Services.ResourceService.Resource.GetMessage("GmNoOrder")
+                    </div>
+                    <div class="specer"></div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Page Header -->
+        <div class="py-4">
+        </div>
+        <!-- End Page Header -->
+
+        <!-- Over view starts -->
+        <div class="row">
+            @Html.Partial("OrderOverviewPartial")
+        </div>
+        <!-- Over view End -->
+        <div class="row">
+            <div class="col">
+                <div class="card card-small">
+                    <div class="card-body p-0 pb-3" id="divOrderList">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Print Model -->
+
+        <div class="modal fade" id="modelPrint" tabindex="-1" role="dialog" aria-labelledby="ModalPopLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width:900px !important;">
+                    <div class="modal-header">
+                        <div style="font-size:20px; font-weight:bold;">@PDM.Services.ResourceService.Resource.GetCaption("PrintOrder").ToUpper()</div>
+                    </div>
+                    <div class="modal-body">
+                        <div id="divPrintArea">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-purple" onclick="PrintHtml();">@PDM.Services.ResourceService.Resource.GetCaption("Print")</button>
+                        <button type="button" class="btn-white" data-dismiss="modal">@PDM.Services.ResourceService.Resource.GetCaption("Cancel")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    <!-- End Print Model -->
+    <script>
+        $(document).ready(function () {
+            
+        });
+        function PrintOrder(orderId) {
+            $.ajax({
+            url: "@Url.Action("PrintOrder", "Order")",
+            type: 'Get',
+                data: { orderId: orderId },
+            success: function (data) {
+                $("#divPrintArea").html(data);
+                $("#modelPrint").modal({
+                    show: true
+                });
+            },
+            error: function () {
+
+            }
+        });
+        }
+        function PrintHtml() {
+            $("#divPrintArea").printThis();
+        }
+    </script>
+
+}
+

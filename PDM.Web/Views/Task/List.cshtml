@@ -1,0 +1,62 @@
+﻿@inject PDM.Services.ITaskService taskService 
+@{
+    ViewData["Title"] = "To Do List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var dateFormat = PDM.Helper.ConfigurationKeys.DateFormat;
+}
+
+@{
+    if (!taskService.IsTaskExist())
+    {
+        <!-- Page Header -->
+        <div class="py-4">
+        </div>
+        <!-- End Page Header -->
+
+        <!-- Start Delivery List-->
+        <div class="row">
+            <div class="col-lg-4 col-md-10 col-sm-12 margin-c">
+                <div class="card card-small h-100 pad-50">
+                    <div class="w-100 center"><img src="~/images/add-customer.jpg"></div>
+                    <div class="w-100 center pad-10">
+                        @PDM.Services.ResourceService.Resource.GetMessage("GmNoTask")
+                    </div>
+                    <div class="specer"></div>
+                    <div class="w-100 center pad-10"><a href="~/Task/Create" class="btn-purple"><i class="fas fa-plus-circle"></i>@PDM.Services.ResourceService.Resource.GetCaption("AddNew")</a></div>
+                    <div class="specer"></div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Page Header -->
+        <div class="py-4">
+        </div>
+        <!-- End Page Header -->
+        <!-- Over view starts -->
+        <div class="row">
+            @Html.Partial("TaskOverviewPartial")
+        </div>
+        <!-- Over view End -->
+        <!-- Start Delivery List-->
+        <div class="row">
+            <div class="col">
+                <div class="card card-small">
+                    <div class="card-body p-0 pb-3" id="divTaskList">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                if (parseInt(screen.width) < 575) {
+                    $("#aNewFromMob").show();
+                } else {
+                    $("#aNewFromWeb").show();
+                }
+            });
+        </script>
+    }
+}
+

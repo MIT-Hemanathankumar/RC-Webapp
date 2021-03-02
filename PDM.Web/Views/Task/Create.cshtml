@@ -1,0 +1,255 @@
+﻿@inject PDM.Services.IUserService userService;
+@model PDM.Model.TaskHead
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var dateFormat = PDM.Helper.ConfigurationKeys.DateFormat;
+    string orderIds = string.Empty;
+    if (Model.Orders != null)
+    {
+        orderIds = string.Join(",", Model.Orders.Select(o => o.ToString()).ToArray());
+    }
+}
+
+@{
+    string buttonCaption = (Model.TaskId > 0) ? PDM.Services.ResourceService.Resource.GetCaption("Update") : PDM.Services.ResourceService.Resource.GetCaption("Create");
+    <!-- Page Header -->
+    <div class="py-4">
+    </div>
+    <!-- End Page Header -->
+    @using (Html.BeginForm("Create", "Task", FormMethod.Post, new { @id = "formCreateTask", @autocomplete = "off" }))
+    {
+        Html.AntiForgeryToken();
+        <input type="hidden" value="@Model.TaskId" name="TaskId" />
+        <input type="hidden" value="@Model.BranchId" name="BranchId" />
+        <input type="hidden" value="@Model.CompanyId" name="CompanyId" />
+        <input type="hidden" value="@Model.CreatedBy" name="CreatedBy" />
+        <input type="hidden" value="@Model.CreatedOn" name="CreatedOn" />
+        <input type="hidden" value="0" name="OneSubmitCount" />
+        
+
+        <div class="modal fade" id="modelValidation" tabindex="-1" role="dialog" aria-labelledby="ModalPopLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body center">
+                        <div>
+                            @if (ViewBag.Message != null)
+                            {
+                                @Html.Raw(ViewBag.Message);
+                            }
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-white" data-dismiss="modal">@PDM.Services.ResourceService.Resource.GetCaption("Ok")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Start Customer Add-->
+        <div class="row">
+            <div class="col">
+                <div class="card card-small mb-4">
+                    <div class="card-body p-10 pb-3">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.DropDownListFor(m => m.TaskStatus, (List<SelectListItem>)ViewBag.TaskStatusList, Html.DisplayNameFor(m => m.TaskStatus), new { @class = "w-100 dd required-field" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.TextBoxFor(m => m.Description, new { @class = "w-100 txtbox required-field", placeholder = Html.DisplayNameFor(m => m.Description), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Description) + "'" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @Html.TextBoxFor(m => m.Remarks, new { @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Remarks), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Remarks) + "'" })
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <span class="mandatory-star"><sup>*</sup></span>
+                                @Html.DropDownListFor(m => m.AssignedTo, (List<SelectListItem>)ViewBag.Drivers, PDM.Services.ResourceService.Resource.GetCaption("SelectAssignedTo"), new { @class = "w-100 dd required-field" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="float-l padright10 pad-8" style="width:90%;">
+                                    @Html.TextBoxFor(m => m.Customer, new { @readonly = true, @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Customer), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Customer) + "'" })
+                                </div>
+                                <div class="float-l padright10 pad-8" style="width:5%;padding-top:20px;">
+                                    <a style="cursor:pointer;" onclick="ShowCustomerSelection();"><i class="fas fa-user-plus"></i></a>
+                                </div>
+                                <div class="float-l padright10 pad-8" style="width:5%;padding-top:20px;">
+                                    <a style="cursor:pointer;" onclick="RemoveCustomerSelection();"><i class="fas fa-user-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="lbl-caption pad-8"><span class="mandatory-star"><sup>*</sup></span>@PDM.Services.ResourceService.Resource.GetCaption("StartDate")</div>
+                                <div class="lbl-value">
+                                    @{
+                                        var startDate = string.Empty;
+                                        if (Model.DateOfStart.HasValue)
+                                        {
+                                            startDate = Model.DateOfStart.Value.ToString(dateFormat);
+                                        }
+                                        @Html.TextBoxFor(m => m.DateOfStart, "{0:" + dateFormat + "}", new { @value = startDate, @class = "w-100 txtbox datepicker2 datepicker-img", @placeholder = Html.DisplayNameFor(m => m.DateOfStart), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.DateOfStart) + "'" })
+                                    }
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <label class="container-checkbox">@PDM.Services.ResourceService.Resource.GetCaption("RepeatTask")&nbsp;@Html.CheckBoxFor(model => model.IsRepeatTask, new { onclick = "FillRepeatTask(this);" })<span class="checkmark-01"></span></label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @{
+                                    if (Model.IsRepeatTask)
+                                    {
+                                        @Html.DropDownListFor(m => m.RepeatCycle, (List<SelectListItem>)ViewBag.RepeateCycles, Html.DisplayNameFor(m => m.RepeatCycle), new { @class = "w-100 dd" })
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(m => m.RepeatCycle, (List<SelectListItem>)ViewBag.RepeateCycles, Html.DisplayNameFor(m => m.RepeatCycle), new { @class = "w-100 dd", @disabled = "disabled" })
+                                    }
+                                }
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @{
+                                    if (Model.IsRepeatTask)
+                                    {
+                                        @Html.DropDownListFor(m => m.CompletionPeriod, (List<SelectListItem>)ViewBag.Intervals, Html.DisplayNameFor(m => m.CompletionPeriod), new { @class = "w-100 dd" })
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(m => m.CompletionPeriod, (List<SelectListItem>)ViewBag.Intervals, Html.DisplayNameFor(m => m.CompletionPeriod), new { @class = "w-100 dd", @disabled = "disabled" })
+                                    }
+
+                                }
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                @{
+                                    if (Model.IsRepeatTask)
+                                    {
+                                        @Html.DropDownListFor(m => m.ReminderPeriod, (List<SelectListItem>)ViewBag.Intervals, Html.DisplayNameFor(m => m.ReminderPeriod), new { @class = "w-100 dd" })
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(m => m.ReminderPeriod, (List<SelectListItem>)ViewBag.Intervals, Html.DisplayNameFor(m => m.ReminderPeriod), new { @class = "w-100 dd", @disabled = "disabled" })
+                                    }
+                                }
+
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="lbl-caption pad-8">@PDM.Services.ResourceService.Resource.GetCaption("RepeatEndDate")</div>
+                                <div class="lbl-value">
+                                    @{
+                                        var dateOfRepeatCompletion = string.Empty;
+                                        if (Model.RepeatEndDate.HasValue)
+                                        {
+                                            dateOfRepeatCompletion = Model.RepeatEndDate.Value.ToString(dateFormat);
+                                        }
+                                        if (Model.IsRepeatTask && !Model.ParentTaskId.HasValue && Model.TaskId == 0)
+                                        {
+                                            @Html.TextBoxFor(m => m.RepeatEndDate, "{0:" + dateFormat + "}", new { @value = dateOfRepeatCompletion, @class = "w -100 txtbox datepicker2 datepicker-img", @placeholder = Html.DisplayNameFor(m => m.RepeatEndDate), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.RepeatEndDate) + "'" })
+
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(m => m.RepeatEndDate, "{0:" + dateFormat + "}", new { @disabled = "disabled", @value = dateOfRepeatCompletion, @class = "w -100 txtbox datepicker2 datepicker-img", @placeholder = Html.DisplayNameFor(m => m.RepeatEndDate), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.RepeatEndDate) + "'" })
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="specer"></div>
+                        </div>
+                    </div>
+                    <!-- Task History -->
+                    
+                    <!--End Task History-->
+                    <div class="card-body p-10 pb-3">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="float-l">
+                                    <button type="button" id="btnBeforeSubmit" class="btn-purple" value="Create" Name="Command">@buttonCaption</button>
+                                    <button type="submit" id="btnSubmit" class="btn-purple" value="Create" Name="Command" hidden="hidden">@buttonCaption</button>
+                                </div>
+                                <div class="specer-btn float-l"></div>
+                                <div class="float-l"><input type="button" class="btn-white" onclick="window.history.back();" value="@PDM.Services.ResourceService.Resource.GetCaption("Cancel")"></div>
+                            </div>
+                            <div class="specer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Customer  -->
+        @Html.Partial("CustomerSelectionPartial")
+        @section Scripts{
+            <script>
+                $(document).ready(function () {
+                    var showError = "@Model.ShowValidationMsg";
+                    if (showError == "True") {
+                        $("#modelValidation").modal("show");
+                    }
+                    $('#Orders').select2();
+                    @*var values = "@orderIds";
+                    $.each(values.split(","), function (i, e) {
+                        if (e != "Not Set" && e != "" && e != null && e != undefined) {
+                            if (!re.test(e)) {
+                                var newList = $.merge($('#Item').select2('data'), [{
+                                    id: e,
+                                    tag: e
+                                }]);
+                                $("#Item").select2('data', newList);
+                                $("#Item").append('<option value="' + e + '">' + e + '</option>');
+                            }
+                            else{
+                                $("#Item").append($("#Item option[value='" + e + "']"));
+                            }
+                        $("#Item option[value='" + e + "']").prop("selected", true);
+                        }
+                    });*@
+                });
+
+                $(function () {
+                    $("#btnBeforeSubmit").click(function () {
+
+                        if ($("#formCreateTask").valid() == false) return false;
+                        var objRepeatTask = $("#IsRepeatTask");
+                        var objRepeatCycle = $("#RepeatCycle");
+                        var objCompletionPeriod = $("#CompletionPeriod");
+                        var objReminderPeriod = $("#ReminderPeriod");
+
+                        
+                        //To avoid saving duplicate task during  continous click
+                        var firstSubmitValue = parseInt($('input[name=OneSubmitCount]').val());
+                        if (firstSubmitValue == 0) {
+                            $('input[name=OneSubmitCount]').val(firstSubmitValue + 1);
+                            $("#btnSubmit").click();
+                        }
+
+                    });
+                });
+
+                
+                function ShowCustomerSelection() {
+                    $("#modelCustomer").modal({
+                        show: true
+                    });
+                }
+
+                function RemoveCustomerSelection() {
+                    $("#CustomerId").val('');
+                    $("#Customer").val('');
+                }
+            </script>
+
+        }
+    }
+}
+<script>
+
+</script>

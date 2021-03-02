@@ -1,0 +1,163 @@
+﻿@model List<PDM.Model.Customer>
+@inject PDM.Services.ICustomerService customerService
+@{
+    ViewData["Title"] = "Customer List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var dateFormat = PDM.Helper.ConfigurationKeys.DateFormat;
+}
+
+@{
+    if (!customerService.IsCustomerExist())
+    {
+ <!-- Page Header -->
+    <div class="py-4">
+    </div>
+ <!-- End Page Header -->
+ <!-- Start Delivery List-->
+    <div class="row">
+        <div class="col-lg-4 col-md-10 col-sm-12 margin-c">
+            <div class="card card-small h-100 pad-50">
+                <div class="w-100 center"><img src="~/images/add-customer.jpg"></div>
+                <div class="w-100 center pad-10">
+                    @PDM.Services.ResourceService.Resource.GetMessage("GmNoCustomer")
+                </div>
+                <div class="specer"></div>
+                <div class="w-100 center pad-10"><a href="~/Customer/Create" class="btn-purple"><i class="fas fa-plus-circle"></i>@PDM.Services.ResourceService.Resource.GetCaption("AddNew")</a></div>
+                <div class="specer"></div>
+            </div>
+        </div>
+    </div>
+    }
+    else
+    {
+ <!-- Page Header -->
+    <div class="py-4">
+    </div>
+ <!-- End Page Header -->
+ <!-- Start Delivery List-->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small">
+                <div class="card-body p-0 pb-3">
+                    <table class="table mb-0" id="tblCustomer">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="border-0 green tbl1" style="width:5%">@PDM.Services.ResourceService.Resource.GetCaption("Id")</th>
+                                <th scope="col" class="border-0 green tbl1" style="width:5%">@PDM.Services.ResourceService.Resource.GetCaption("Tags")</th>
+                                <th scope="col" class="border-0 green tbl1" style="width:27%">@PDM.Services.ResourceService.Resource.GetCaption("Name")</th>
+                                <th scope="col" class="border-0 green tbl1" style="width:30%">@PDM.Services.ResourceService.Resource.GetCaption("Address")</th>
+                                <th scope="col" class="border-0 green tbl1" style="width:8%">@PDM.Services.ResourceService.Resource.GetCaption("DOB")</th>
+                                <th scope="col" class="border-0 green tbl1" style="width:20%">@PDM.Services.ResourceService.Resource.GetCaption("ContactNumber")</th>
+                                <th scope="col" class="border-0 green tbl1" style="width:15%">@PDM.Services.ResourceService.Resource.GetCaption("Service")</th>
+                                <th scope="col" class="border-0 green tbl1" style="width:10%">@PDM.Services.ResourceService.Resource.GetCaption("Action")</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var dtCustomerList;
+        var orderCreateURL = "@Url.Action("Create","Order")?CustomerId=";
+        $(document).ready(function () {
+            if (parseInt(screen.width) < 575) {
+                $("#aNewFromMob").show();
+            } else {
+                $("#aNewFromWeb").show();
+            }
+            dtCustomerList = $("#tblCustomer").DataTable({
+                // Design Assets
+                stateSave: true,
+                autoWidth: true,
+                // ServerSide Setups
+                processing: false,
+                serverSide: true,
+                // Paging Setups
+                paging: true,
+                pagination: true,
+                lengthChange: false,
+                pageLength: 15,
+                // Searching Setups
+                searching: { regex: true },
+                // Ajax Filter
+                ajax: {
+                    url: "@Url.Action("LoadListData","Customer")",
+                    type: "POST",
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: function (data) {
+                        return JSON.stringify(data);
+                    }
+                },
+                // Columns Setups
+                columns: [
+                    { data: "customerId", name: "customerId" },
+                    { data: "pickupType", name: "pickupType" },
+                    { data: "fullName", name: "fullName" },
+                    { data: "fullAddress", name: "fullAddress" },
+                    {
+                        data: "dob",
+                        name: "dob",
+                        render: function (data, type, row) {
+                            // If display or filter data is requested, format the date
+                            if (type === "display" || type === "filter") {
+                                return moment(data).format("DD/MM/YYYY");
+                            }
+                            // Otherwise the data type requested (`type`) is type detection or
+                            // sorting data, for which we want to use the raw date value, so just return
+                            // that, unaltered
+                            return data;
+                        }
+                    },
+                    { data: "contactNo", name: "contactNo" },
+                    { data: "caseType", name: "caseType" },
+                ],
+                // Column Definitions
+                columnDefs: [
+                    { targets: "no-search", searchable: false },
+                    {
+                        targets: 1,
+                        data: null,
+                        render: function (data, type, row) {
+                            return (parseInt(row.pickupTypeId) > 0) ? (row.pickupTypeId == 1) ? "<a><i class=\"fas fa-shopping-bag\"></i></a>" : "<a><i class=\"fas fa-shipping-fast\"></i></a>" : ""
+                        },
+                        orderable: false
+                    },
+                    { targets: "no-search", searchable: false },
+                    { targets: "no-search", searchable: false },
+                    { targets: "date-type", type: "date-eu" },
+                    { targets: "no-search", searchable: false },
+                    { targets: "no-search", searchable: false },
+                    {
+                        targets: 7,
+                        data: null,
+                        render: function (data, type, row) { return "<a style=\"cursor:pointer;\" onclick=\"ShowRightPanel('Customer'," + row.customerId + ");\"><i class=\"fas fa-eye\"></i></a>"; },
+                        orderable: false
+                    },
+                ],
+                createdRow: function (row, data, dataIndex) {
+                    $(row).addClass('tbl-bg');
+                }
+            });
+            $("#tblCustomer_filter").hide();
+            //dtCustomerList.search('').draw();
+            $('#tblCustomer tbody').on('dblclick', 'tr', function () {
+                var rowData = dtCustomerList.row(this).data();
+                window.location.href = orderCreateURL + rowData.customerId;
+            });
+
+        });
+
+        function strtrunc(str, num) {
+            if (str.length > num) {
+                return str.slice(0, num) + "...";
+            }
+            else {
+                return str;
+            }
+        }
+    </script>
+    }
+}
+

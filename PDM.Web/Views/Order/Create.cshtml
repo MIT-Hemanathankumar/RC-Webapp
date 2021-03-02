@@ -1,0 +1,368 @@
+﻿@inject PDM.Services.IUserService userService
+@model PDM.Model.Order
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var visibleCount = 0;
+    var viewCap = PDM.Services.ResourceService.Resource.GetCaption("View").ToLower();
+    var dateFormat = PDM.Helper.ConfigurationKeys.DateFormat;
+}
+
+
+
+<!-- Page Header -->
+<div class="py-4">
+</div>
+<!-- End Page Header -->
+@using (Html.BeginForm("Create", "Order", FormMethod.Post, new { @id = "formCreateOrder", @autocomplete = "off" }))
+{
+    Html.AntiForgeryToken();
+    string pageCaption = $"{PDM.Services.ResourceService.Resource.GetCaption("New")} {PDM.Services.ResourceService.Resource.GetCaption("Order")}";
+    <input type="hidden" value="@Model.CustomerId" name="CustomerId" />
+    <input type="hidden" value="@Model.OldRecentDeliveryNote" name="OldRecentDeliveryNote" />
+    @Html.HiddenFor(m => m.TempDeliveryNote)
+    @Html.HiddenFor(m => m.TempBranchNote)
+    <!-- Start Delivery List-->
+    <div class="row">
+        <div class="col">
+            <div class="card card-small mb-4">
+                <div class="card-header">
+                    <h6 class="m-0 bold">@PDM.Services.ResourceService.Resource.GetCaption("OrderDetails")</h6>
+                </div>
+                <div class="card-body p-10 pb-3">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <span class="mandatory-star"><sup>*</sup></span>
+                            @Html.DropDownListFor(m => m.Customer.Title, userService.GetTitleList(), new { @disabled = "disabled", @class = "w-100 dd" })
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <span class="mandatory-star"><sup>*</sup></span>
+                            @Html.TextBoxFor(m => m.Customer.FirstName, new { @readonly = true, @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Customer.FirstName), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Customer.FirstName) + "'" })
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            @Html.TextBoxFor(m => m.Customer.MiddleName, new { @readonly = true, @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Customer.MiddleName), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Customer.MiddleName) + "'" })
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <span class="mandatory-star"><sup>*</sup></span>
+                            @Html.TextBoxFor(m => m.Customer.LastName, new { @readonly = true, @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Customer.LastName), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Customer.LastName) + "'" })
+                        </div>
+                        <div class="specer"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            @Html.TextBoxFor(m => m.Customer.Mobile, new { data_val = false, @readonly = true, @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Customer.Mobile), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Customer.Mobile) + "'" })
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            @Html.TextBoxFor(m => m.Customer.Email, new { data_val = false, @readonly = true, @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.Customer.Email), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.Customer.Email) + "'" })
+                        </div>
+                        <div class="specer"></div>
+                        @{
+                            var customerFile = string.Empty;
+                            if (Model.Customer.CustomerDocuments != null && Model.Customer.CustomerDocuments.Count > 0)
+                            {
+                                customerFile = Model.Customer.CustomerDocuments[0].DocumentPath;
+                            }
+                        }
+                        <div class="col-lg-3 col-md-3 col-sm-12 pad-8">
+                            <i class="fas fa-file-alt orange"></i> @PDM.Services.ResourceService.Resource.GetCaption("MedicalReport")
+                            @{
+                                if (!string.IsNullOrEmpty(customerFile))
+                                {
+                                    <a asp-controller="Order" asp-action="Download" asp-route-filename="@customerFile" class="view-link"><span class="view">&nbsp;<i class="fas fa-eye purple"></i>&nbsp;@viewCap&nbsp;</span></a>
+                                }
+                            }
+
+                        </div>
+                        @if (userService.GetLoggdInUser() != null && userService.GetLoggdInUser().Role != "Customer")
+                        {
+                            <div class="col-lg-3 col-md-3 col-sm-12  pad-8">
+                                <i class="fas fa-file-alt orange"></i> @PDM.Services.ResourceService.Resource.GetCaption("Prescription")
+                                @{
+                                    if (!string.IsNullOrEmpty(customerFile))
+                                    {
+                                        <a asp-action="Download" asp-route-filename="@customerFile" class="view-link"><span class="view">&nbsp;<i class="fas fa-eye purple"></i>&nbsp;@viewCap&nbsp;</span></a>
+                                    }
+                                }
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12  pad-8">
+                                <span style="float:left;">@PDM.Services.ResourceService.Resource.GetCaption("OrderType")</span>
+                                <span style="padding-left:15px; float:left;"><label class="container-radio">@PDM.Services.ResourceService.Resource.GetCaption("OneTime")&nbsp;@Html.RadioButtonFor(model => model.OrderTypeId, 1, new { id = "rdoOrderType1", onclick = "ShowIntervals(this.value);" })<span class="checkmark"></span></label></span>
+                                <span style="padding-left:15px; float:left;display:none;"><label class="container-radio">@PDM.Services.ResourceService.Resource.GetCaption("Repeat")&nbsp; @Html.RadioButtonFor(model => model.OrderTypeId, 2, new { id = "rdoOrderType2", onclick = "ShowIntervals(this.value);" })<span class="checkmark"></span></label></span>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12">
+                                <div id="divIntervals" style="display:none;">
+                                    @{
+                                        if (Model.OrderTypeId == 1)
+                                        {
+                                            @Html.DropDownListFor(m => m.IntervalCount, (List<SelectListItem>)ViewBag.Intervals, Html.DisplayNameFor(m => m.IntervalCount), new { @class = "w-100 dd", @disabled = "disabled" })
+                                        }
+                                        else
+                                        {
+                                            @Html.DropDownListFor(m => m.IntervalCount, (List<SelectListItem>)ViewBag.Intervals, Html.DisplayNameFor(m => m.IntervalCount), new { @class = "w-100 dd" })
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="specer">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="float-l padright10 pad-8">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("Tags")
+                                    <span class="mandatory-star"><sup>*</sup></span>
+                                </div>
+                                <div class="float-l" style="width:60%;">
+                                    @Html.DropDownListFor(m => m.PickupTypeId, (List<SelectListItem>)ViewBag.PickTypes, Html.DisplayNameFor(m => m.PickupTypeId), new { @class = "w-100 dd" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-9">
+                                <div class="float-l padright10 pad-8">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("Location")
+                                </div>
+                                <div class="float-l" style="width:60%;">
+                                    @Html.TextBoxFor(m => m.RackNo, new { @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.RackNo), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.RackNo) + "'" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="float-l padright10 pad-8">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("DeliveryDate")
+                                </div>
+                                <div class="float-r" style="width:60%;">
+                                    @{
+                                        var deliveryDate = string.Empty;
+                                        if (Model.DeliveryDate.HasValue)
+                                        {
+                                            deliveryDate = Model.DeliveryDate.Value.ToString(dateFormat);
+                                        }
+                                    }
+                                    @Html.TextBoxFor(m => m.DeliveryDate, "{0:" + dateFormat + "}", new { @value = deliveryDate, @class = "w -100 txtbox datepicker2 datepicker-img", @placeholder = Html.DisplayNameFor(m => m.DeliveryDate), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.DeliveryDate) + "'" })
+                                </div>
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="float-l padright10 pad-8">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("CaseType")
+                                </div>
+                                <div class="float-l" style="width:60%;">
+                                    @Html.DropDownListFor(m => m.CaseTypeId, (List<SelectListItem>)ViewBag.CaseTypes, Html.DisplayNameFor(m => m.CaseTypeId), new { @class = "w-100 dd" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-8">
+                                <div class="float-l padright10 pad-8">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("Status")
+                                    <span class="mandatory-star" style="float:right"><sup>*</sup></span>
+                                </div>
+                                <div class="float-l" style="width:60%;">
+                                    @Html.DropDownListFor(m => m.OrderStatus, (List<SelectListItem>)ViewBag.OrderStatusList, Html.DisplayNameFor(m => m.OrderStatus), new { @class = "w-100 dd" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="float-l padright10 pad-8">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("Storage")
+                                </div>
+                                <div class="float-l" style="width:60%;">
+                                    <span class="pad-left15 pad-8" style="float:left;">
+                                        <label class="container-checkbox">@PDM.Services.ResourceService.Resource.GetCaption("Fridge")&nbsp;@Html.CheckBoxFor(model => model.IsStorageFridge, new { id = "chkFridge" })<span class="checkmark-01"></span></label>
+                                    </span>
+                                    <span class="pad-left15 pad-8" style="float:left;">
+                                        <label class="container-checkbox">@PDM.Services.ResourceService.Resource.GetCaption("ControlledDrugs")&nbsp;@Html.CheckBoxFor(model => model.IsControlledDrugs, new { id = "chkFridge" })<span class="checkmark-01"></span></label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="specer"></div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="float-l padright10 pad-8">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("Route")
+                                </div>
+                                <div class="float-l" style="width:60%;">
+                                    @Html.DropDownListFor(m => m.RouteId, (List<SelectListItem>)ViewBag.Routes, PDM.Services.ResourceService.Resource.GetCaption("SelectRoute"), new { @class = "w-100 dd" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12"></div>
+                            <div class="specer"></div>
+                        }
+                        else
+                        {
+                            <input type="hidden" value="@Model.OrderTypeId" name="OrderTypeId" />
+                            <input type="hidden" value="@Model.PickupTypeId" name="PickupTypeId" />
+                            <input type="hidden" value="@Model.OrderStatus" name="OrderStatus" />
+                        }
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h6 class="m-0 bold">@PDM.Services.ResourceService.Resource.GetCaption("DosageDetails")</h6> <div style="float:right;"><a style="cursor:pointer;" id="addItem" onclick="CheckForNewRow();"><i class="fas fa-plus green"></i></a></div>
+                </div>
+                <div class="card-inner card-body p-0 pb-3" style="margin:15px;">
+                    <table class="tablegrid mb-0" id="tblOrderDetail">
+                        <thead>
+                            <tr class="bg-light-blue">
+                                <th scope="col" class="border-0" style="width:45%;">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("MedicineName")
+                                </th>
+                                <th scope="col" class="border-0" style="width:10%;">@PDM.Services.ResourceService.Resource.GetCaption("Morning")</th>
+                                <th scope="col" class="border-0" style="width:7%;">@PDM.Services.ResourceService.Resource.GetCaption("Afternoon")</th>
+                                <th scope="col" class="border-0" style="width:7%;">@PDM.Services.ResourceService.Resource.GetCaption("Evening")</th>
+                                <th scope="col" class="border-0" style="width:7%;">@PDM.Services.ResourceService.Resource.GetCaption("Night")</th>
+                                <th scope="col" class="border-0" style="width:8%;">@PDM.Services.ResourceService.Resource.GetCaption("Duration")</th>
+                                <th scope="col" class="border-0" style="width:7%;">@PDM.Services.ResourceService.Resource.GetCaption("Quantity")</th>
+                                <th scope="col" class="border-0" style="width:13%;">@PDM.Services.ResourceService.Resource.GetCaption("Remarks")</th>
+                                <th scope="col" class="border-0" style="width:3%;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="detailRows">
+                            @{
+                                for (int i = 0; i < Model.OrderDetails.Count; i++)
+                                {
+                                    if (Model.OrderDetails[i].IsVisible) { visibleCount++; }
+                                    string visbleStr = (Model.OrderDetails[i].IsVisible) ? "''" : "none";
+                                    string rowID = $"row_{i}";
+                                    <tr id="@rowID" style="display:@visbleStr">
+                                        <td class="tbl-bg-active">
+                                            @Html.TextBoxFor(m => m.OrderDetails[i].MedicineName, new { @readonly = true, @class = "w-100 txtbox inputMedicine", @id = $"Order{i}.MedicineName" })
+                                            @Html.HiddenFor(m => m.OrderDetails[i].ProductId, new { @id = $"Order{i}.ProductId", @class = "inputProductId" })
+                                        </td>
+                                        <td>
+                                            <div class="pad-top-10">@Html.TextBoxFor(m => m.OrderDetails[i].Morning, new { @class = "w-100 txtbox inputMorning", @id = $"Order{i}.Morning", onblur = $"CalculateDuration({i})" })</div>
+                                        </td>
+                                        <td>
+                                            <div class="pad-top-10">@Html.TextBoxFor(m => m.OrderDetails[i].AfterNoon, new { @class = "w-100 txtbox inputAfterNoon", @id = $"Order{i}.AfterNoon", onblur = $"CalculateDuration({i})" })</div>
+                                        </td>
+                                        <td>
+                                            <div class="pad-top-10">@Html.TextBoxFor(m => m.OrderDetails[i].Evening, new { @class = "w-100 txtbox inputEvening", @id = $"Order{i}.Evening", onblur = $"CalculateDuration({i})" })</div>
+                                        </td>
+                                        <td>
+                                            <div class="pad-top-10">@Html.TextBoxFor(m => m.OrderDetails[i].Night, new { @class = "w-100 txtbox inputNight", @id = $"Order{i}.Night", onblur = $"CalculateDuration({i})" })</div>
+                                        </td>
+                                        <td>
+                                            <div class="pad-top-10">@Html.TextBoxFor(m => m.OrderDetails[i].Duration, new { @class = "w-100 txtbox inputDuration", @id = $"Order{i}.Duration", onblur = $"CalculateDuration({i})" })</div>
+                                        </td>
+                                        <td>
+                                            <div class="pad-top-10">@Html.TextBoxFor(m => m.OrderDetails[i].Quantity, new { @class = "w-100 txtbox inputQuantity", @id = $"Order{i}.Quantity" })</div>
+                                        </td>
+                                        <td>
+                                            <div class="pad-top-10">
+                                                @Html.TextBoxFor(m => m.OrderDetails[i].Remarks, new { @class = "w-100 txtbox", @id = $"Order{i}.Remarks" })
+                                                <div class="dvlastrow">
+                                                    @Html.HiddenFor(m => m.OrderDetails[i].IsVisible, new { id = "hdnVis_" + rowID })
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="pad-top-10">
+                                                @{
+                                                    <a style="cursor:pointer;" onclick="RemoveRow('@rowID');"><i class="fas fa-trash"></i></a>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-body p-10 pb-3">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <span>New Delivery Note</span>
+                            @Html.TextAreaFor(m => m.RecentDeliveryNote, new { @rows = "4", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.RecentDeliveryNote), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.RecentDeliveryNote) + "'" })
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <span>Existing Delivery Note</span>
+                            @Html.TextAreaFor(m => m.DeliveryNote, new { @disabled = "disabled", @rows = "4", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.DeliveryNote), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.DeliveryNote) + "'" })
+                        </div>
+                        <div class="specer"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <span>Surgery Note</span>
+                            @Html.TextAreaFor(m => m.SurgeryNote, new { @rows = "4", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.SurgeryNote), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.SurgeryNote) + "'" })
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <span>Branch Note</span>
+                            @Html.TextAreaFor(m => m.BranchNote, new { @disabled = "disabled", @rows = "4", @class = "w-100 txtbox", placeholder = Html.DisplayNameFor(m => m.BranchNote), onfocus = "this.placeholder = ''", onblur = "this.placeholder ='" + Html.DisplayNameFor(m => m.BranchNote) + "'" })
+                        </div>
+                        <div class="specer"></div>
+                    </div>
+                    <div class="specer"></div>
+                </div>
+                <div class="card-body p-10 pb-3">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="float-l">
+                                <label class="container-checkbox">
+                                    @PDM.Services.ResourceService.Resource.GetCaption("EmailNotify")&nbsp;@Html.CheckBoxFor(m => m.SendEmail)<span class="checkmark-01"></span>
+                                </label>
+                            </div><div class="float-l">
+                                <button type="submit" id="btnSubmit" style="display:none;" class="btn-purple" value="Create" Name="Command"></button>
+                                <input type="button" id="btnBeforeSubmit" class="btn-purple" value="@PDM.Services.ResourceService.Resource.GetCaption("Create")" data-toggle="modal">
+                            </div>
+                            <div class="specer-btn float-l"></div>
+                            <div class="float-l"><input type="button" class="btn-white" onclick="window.history.back();" value="@PDM.Services.ResourceService.Resource.GetCaption("Cancel")"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Delivery List -->
+    @Html.Partial("MedicineSelectionPartial")
+    <input type="hidden" value="@visibleCount.ToString()" name="hidRows" id="hidRows" />
+
+    <script>
+        $(document).ready(function () {
+            $("#divPageTitle").text("@pageCaption");
+            $('#tblOrderDetail').dataTable({
+                "searching": false,
+                "lengthChange": false,
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "responsive": true
+            });
+        });
+
+        function CheckForNewRow() {
+            orderMedicineList = [];
+            $("#modelCustMedicines").modal({
+                show: true
+            });
+            $('.nav-tabs a:first').tab('show')
+        }
+
+        function ShowIntervals(val) {
+            //divIntervals
+            if (val == 1)
+                $("#IntervalCount").prop('disabled', 'disabled');
+            else
+                $("#IntervalCount").prop('disabled', false);
+        }
+
+        function CalculateDuration(ctrlId) {
+            let morningCount = parseInt(document.getElementById('Order' + ctrlId + '.Morning').value);
+            if (isNaN(morningCount)) morningCount = 0;
+            let noonCount = parseInt(document.getElementById('Order' + ctrlId + '.AfterNoon').value);
+            if (isNaN(noonCount)) noonCount = 0;
+            let eveCount = parseInt(document.getElementById('Order' + ctrlId + '.Evening').value);
+            if (isNaN(eveCount)) eveCount = 0;
+            let nightCount = parseInt(document.getElementById('Order' + ctrlId + '.Night').value);
+            if (isNaN(nightCount)) nightCount = 0;
+            let totalDuration = parseInt(document.getElementById('Order' + ctrlId + '.Duration').value);
+
+            let quantity = 0;
+            let takeCount = (morningCount + noonCount + eveCount + nightCount);
+            quantity = parseInt(totalDuration * takeCount);
+
+            if (quantity > 0)
+                document.getElementById('Order' + ctrlId + '.Quantity').value = parseInt(quantity);
+        }
+
+        $(function () {
+            $("#btnBeforeSubmit").click(function () {
+                if ($("#formCreateOrder").valid() == false) return false;
+                var orderItemRows = $("#tblOrderDetail").find('tbody tr:visible');
+                //if (orderItemRows.length == 0) {
+                //    ShowModelInfo("Please select a medicine")
+                //    return false;
+                //}
+                $("#btnSubmit").click();
+            });
+        });
+
+    </script>
+
+}
