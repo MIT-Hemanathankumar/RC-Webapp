@@ -1,0 +1,12 @@
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\bin\Debug\netcoreapp3.0\PDM.Model.deps.json
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\bin\Debug\netcoreapp3.0\PDM.Model.dll
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\bin\Debug\netcoreapp3.0\PDM.Model.pdb
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\bin\Debug\netcoreapp3.0\PDM.Data.Entity.dll
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\bin\Debug\netcoreapp3.0\PDM.Data.Entity.pdb
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\obj\Debug\netcoreapp3.0\PDM.Model.csprojAssemblyReference.cache
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\obj\Debug\netcoreapp3.0\PDM.Model.csproj.CoreCompileInputs.cache
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\obj\Debug\netcoreapp3.0\PDM.Model.AssemblyInfoInputs.cache
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\obj\Debug\netcoreapp3.0\PDM.Model.AssemblyInfo.cs
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\obj\Debug\netcoreapp3.0\PDM.Model.csproj.CopyComplete
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\obj\Debug\netcoreapp3.0\PDM.Model.dll
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Model\obj\Debug\netcoreapp3.0\PDM.Model.pdb

@@ -1,0 +1,12 @@
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\bin\Debug\netcoreapp3.0\PDM.Data.Entity.deps.json
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\bin\Debug\netcoreapp3.0\PDM.Data.Entity.runtimeconfig.json
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\bin\Debug\netcoreapp3.0\PDM.Data.Entity.runtimeconfig.dev.json
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\bin\Debug\netcoreapp3.0\PDM.Data.Entity.dll
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\bin\Debug\netcoreapp3.0\PDM.Data.Entity.pdb
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\obj\Debug\netcoreapp3.0\PDM.Data.Entity.csprojAssemblyReference.cache
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\obj\Debug\netcoreapp3.0\PDM.Data.Entity.csproj.CoreCompileInputs.cache
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\obj\Debug\netcoreapp3.0\PDM.Data.Entity.AssemblyInfoInputs.cache
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\obj\Debug\netcoreapp3.0\PDM.Data.Entity.AssemblyInfo.cs
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\obj\Debug\netcoreapp3.0\PDM.Data.Entity.dll
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\obj\Debug\netcoreapp3.0\PDM.Data.Entity.pdb
+E:\RA\Web\Jesuraj\PDM\Source\001\PDM.Data.Entity\obj\Debug\netcoreapp3.0\PDM.Data.Entity.genruntimeconfig.cache

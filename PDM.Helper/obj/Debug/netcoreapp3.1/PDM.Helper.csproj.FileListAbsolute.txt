@@ -1,0 +1,8 @@
+F:\Working\Kumaresan\BorthPharma\Live\PDM.Helper\bin\Debug\netcoreapp3.1\PDM.Helper.deps.json
+F:\Working\Kumaresan\BorthPharma\Live\PDM.Helper\bin\Debug\netcoreapp3.1\PDM.Helper.dll
+F:\Working\Kumaresan\BorthPharma\Live\PDM.Helper\bin\Debug\netcoreapp3.1\PDM.Helper.pdb
+F:\Working\Kumaresan\BorthPharma\Live\PDM.Helper\obj\Debug\netcoreapp3.1\PDM.Helper.csprojAssemblyReference.cache
+F:\Working\Kumaresan\BorthPharma\Live\PDM.Helper\obj\Debug\netcoreapp3.1\PDM.Helper.AssemblyInfoInputs.cache
+F:\Working\Kumaresan\BorthPharma\Live\PDM.Helper\obj\Debug\netcoreapp3.1\PDM.Helper.AssemblyInfo.cs
+F:\Working\Kumaresan\BorthPharma\Live\PDM.Helper\obj\Debug\netcoreapp3.1\PDM.Helper.dll
+F:\Working\Kumaresan\BorthPharma\Live\PDM.Helper\obj\Debug\netcoreapp3.1\PDM.Helper.pdb
