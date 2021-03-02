@@ -1,0 +1,1640 @@
+/* Home page styles start */
+.homepage .p0 {
+    padding: 0;
+}
+
+.homepage .f-left {
+    float: left;
+}
+
+.homepage .f-right {
+    float: right;
+}
+
+.homepage img {
+    max-width: 100%;
+}
+
+body.homepage {
+    background-color: #fff;
+    color: #000;
+}
+
+.homepage h1, .homepage h2, .homepage h3 {
+    color: #000;
+}
+
+.homepage h1 {
+    font-size: 2.5rem;
+    letter-spacing: normal;
+}
+
+.homepage h2 {
+    font-size: 2rem;
+    letter-spacing: normal;
+}
+
+.homepage p {
+    color: #555;
+    font-size: 1rem;
+}
+
+.homepage header.container {
+    padding: 0;
+}
+
+.homepage .logo {
+    float: left;
+    padding-top: 20px;
+}
+
+.homepage .logo img {
+    width: 200px;
+}
+
+.homepage nav {
+    float: right;
+    padding: 30px 0;
+}
+
+.homepage nav a, .homepage .footer-nav a {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.homepage nav ul, .homepage .footer-nav ul, .homepage .footer-social ul {
+    list-style: none;
+    padding: 0;
+}
+
+.homepage nav ul li, .homepage .footer-nav ul li, .homepage .footer-social ul li {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.homepage .footer-social p {
+    margin-bottom: 0.5rem;
+}
+
+.homepage .footer-social ul li {
+    margin-right: 5px;
+}
+
+.homepage nav ul li:last-child {
+    margin-right: 0;
+}
+
+.homepage .btn {
+    color: #fff;
+    padding: 10px 20px;
+    width: fit-content;
+    font-size: 1rem;
+}
+
+.homepage .btn-orange {
+    background-color: #E68513;
+}
+
+.homepage .btn-blue {
+    background-color: #0077AB;
+}
+
+.homepage .btn-grey {
+    background-color: #333;
+}
+
+.homepage .btn-green {
+    background-color: #4CAF50;
+}
+
+.homepage .orange-txt {
+    color: #E68513;
+}
+
+.homepage .banner-content p {
+    margin-bottom: 0;
+}
+
+.homepage .app-store {
+    background: #333 url("../images/apple-icon.png") no-repeat 10px center;
+    background-size: 15%;
+    padding-left: 35px;
+    margin-right: 15px;
+}
+
+.homepage .play-store {
+    background: #4CAF50 url("../images/android-icon.png") no-repeat 10px center;
+    background-size: 15%;
+    padding-left: 35px;
+}
+
+.homepage .download-app .download-btns {
+    margin-top: 20px;
+}
+
+.homepage .store-locator {
+    background: #ED8306 url("../images/store-locator-icon.png") no-repeat 15px center;
+    background-size: 15%;
+    padding-left: 45px;
+    margin-left: 15px;
+}
+
+.banner-image {
+    border-bottom: 3px solid #0077AB;
+    background: url(../images/home-banner.png) no-repeat center bottom;
+    height: 100vh;
+    width: 100%;
+    background-size: 60%;
+}
+
+.banner-image .banner-text {
+    position: absolute;
+    left: 10%;
+    top: 20%;
+    color: #fff;
+    text-align: left;
+}
+.homepage .signup {
+    padding-top: 40px;
+}
+.banner-image h3 {
+    position: relative;
+    padding: 0;
+    color: #404040;
+    line-height: 3rem;
+    margin: 0;
+}
+
+.homepage .banner-image img {
+    max-width: 100%;
+}
+
+.homepage .how-it-works img {
+    max-width: 80%;
+}
+
+.homepage .vertical-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.homepage .facilities img {
+    max-width: 80%;
+}
+
+.homepage .signup-boxes {
+    justify-content: flex-end;
+    display: flex;
+    padding: 0;
+    flex-flow: wrap;
+}
+
+.homepage .signup-boxes .track-delivery img, .homepage .signup-boxes .home-delivery img {
+    width: 70px;
+    margin-top: 10px;
+}
+
+.homepage .signup-boxes .color-box {
+    border-radius: 4px;
+    padding: 20px 10px 15px;
+    text-align: center;
+    width: 29%;
+    float: left;
+    height: 150px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.homepage .signup-boxes .color-box img {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.homepage .signup-boxes .color-box p {
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.homepage .blue-bg {
+    background-color: #3854C6;
+}
+
+.homepage .orange-bg {
+    background-color: #ED8306;
+}
+
+.homepage .light-blue-bg {
+    background-color: #7368DD;
+}
+
+.homepage .purple-bg {
+    background-color: #AC50DB;
+}
+
+.homepage .green-bg {
+    background-color: #00CBAF;
+}
+
+.homepage .grey-bg {
+    background-color: #808797;
+}
+
+.homepage .signup .signup-content p {
+    width: 70%;
+    line-height: 1.4rem;
+}
+
+/* .homepage .signup, .homepage .how-it-works, .homepage .download-app, .homepage .how-to-repeate-click {
+    padding-bottom: 60px;
+} */
+
+.homepage .how-to-repeate-click h2 {
+    padding-bottom: 20px;
+}
+
+.homepage .store-locator-btn {
+    padding-top: 20px;
+}
+
+.homepage .repeat-click-steps {
+    background: transparent url(../images/steps-line.png) no-repeat center 67%;
+    background-size: contain;
+}
+
+.homepage .carousel {
+    box-shadow: none;
+    background: transparent url(../images/slider-bg.png) no-repeat center;
+    background-size: 75%;
+    height: 540px;
+}
+
+.homepage .carousel .carousel-item {
+    margin-top: 66%;
+    border-radius: 25px;
+    margin-left: 5px;
+}
+
+.homepage .carousel-item img {
+    position: relative;
+    width: 98%;
+    height: auto;
+}
+
+.homepage .download-app .carousel-inner {
+    position: relative;
+    width: 47%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.homepage .carousel-indicators li {
+    background-color: #0077AB;
+}
+
+.homepage .carousel-indicators .active {
+    background-color: #E68513;
+}
+
+.homepage .carousel-indicators {
+    bottom: -20px;
+}
+
+.homepage .carousel-control-prev, .homepage .carousel-control-next {
+    display: none;
+}
+
+.homepage .download-app p, .homepage .facilities p {
+    width: 70%;
+    line-height: 1.4rem;
+}
+
+.homepage .repeat-click-steps {
+    padding: 30px 0;
+}
+
+.homepage .repeat-click-steps .steps p {
+    margin-bottom: 0;
+    padding-top: 20px;
+}
+
+.homepage .footer-nav {
+    padding: 0;
+    text-align: center;
+}
+
+.homepage .footer-social {
+    text-align: center;
+    clear: both;
+}
+
+.homepage .footer-social .follow-us, .homepage .footer-social .copyright {
+    width: 100%;
+}
+
+.homepage .footer-social img {
+    width: 32px;
+}
+
+.homepage footer .copyright {
+    font-size: 0.75rem;
+}
+
+.homepage nav a:hover, .homepage .footer-nav a:hover {
+    text-decoration: none;
+    color: #E68513;
+}
+
+.homepage .signup-store-btns {
+    margin-top: 10px;
+}
+
+.homepage .signup-store-btns .btn {
+    padding: 10px;
+    font-size: 0.875rem;
+}
+
+.homepage .signup-store-btns .store-locator {
+    background: #0077AB url(../images/store-locator-icon.png) no-repeat 10px center;
+    background-size: 12%;
+    padding-left: 30px;
+    margin-left: 5px;
+}
+
+.homepage .back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 0;
+    display: none;
+    min-width: 35px;
+    background-color: #E68513;
+    border-radius: 50px;
+}
+
+.visible-xs {
+    display: none;
+}
+
+/* Home page styles end */
+
+/* About Us page styles start */
+
+.aboutus .title-header {
+    background-color: #fff;
+}
+
+.aboutus .title-header h1 {
+    padding: 30px 0;
+    color: #E68513;
+    font-weight: 500;
+}
+
+.aboutus .grey-txt {
+    color: #555555;
+}
+
+.aboutus .pharmacy, .aboutus .delivery-service, .contactus {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.aboutus .pharmacy p, .aboutus .delivery-service p {
+    width: 80%;
+}
+
+.aboutus .pharmacy img, .aboutus .delivery-service img {
+    width: 85%;
+}
+
+/* About Us page styles end */
+
+/* Pricing Details page styles start */
+
+.pricing-details .title-header {
+    background-color: #fff;
+}
+
+.pricing-details .title-header h1 {
+    padding: 30px 0;
+    color: #E68513;
+    font-weight: 400;
+    margin: 0;
+}
+
+.pricing-details .subscription {
+    color: #555;
+    margin: 30px auto 50px;
+    -webkit-box-shadow: 0px 0px 5px 5px #eee;
+    -moz-box-shadow: 0px 0px 5px 5px #eee;
+    box-shadow: 0px 0px 5px 5px #eee;
+    min-height: 200px;
+    border-radius: 8px;
+}
+
+.pricing-details .subscription .plan-details {
+    width: 75%;
+    padding: 40px 0;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.pricing-details .subscription .plan-items {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.pricing-details .subscription .plan-items .plan-desc {
+    width: 88%;
+}
+
+.pricing-details .subscription .plan-items .plan-value {
+    width: 12%;
+}
+
+.pricing-details .plan-items svg {
+    width: 25px;
+}
+
+.pricing-details .plan-items svg path {
+    fill: #E68513;
+}
+
+.pricing-details .subscription-switch span {
+    text-transform: uppercase;
+}
+
+.pricing-details .subscription p {
+    margin-bottom: 0;
+}
+
+.pricing-details .subscription-details {
+    padding: 25px 0;
+    background-color: #F7F7FF;
+}
+
+.pricing-details .subscription-details .save-txt {
+    color: #E68513;
+    font-weight: bold;
+}
+
+.pricing-details .subscription-switch {
+    justify-content: center;
+    display: flex;
+}
+
+.pricing-details .free-trail-btn {
+    text-align: right;
+    padding: 20px 0;
+}
+
+/* Subscription Switch styles */
+
+.switch {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 24px;
+    padding: 0 20px;
+    float: left;
+    margin: 0;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.switch-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.switch-label {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-size: 10px;
+    text-transform: uppercase;
+    border-radius: inherit;
+    background: #fff;
+    border: 1px solid #D2D2E3;
+}
+
+.switch-label:before, .switch-label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+}
+
+.switch-label:before {
+    content: attr(data-off);
+    right: 8px;
+    color: #fff;
+}
+
+.switch-label:after {
+    content: attr(data-on);
+    left: 11px;
+    color: #FFFFFF;
+    opacity: 0;
+}
+
+.switch-input:checked~.switch-label {
+    background: #fff;
+    border: 1px solid #D2D2E3;
+}
+
+.switch-input:checked~.switch-label:before {
+    opacity: 0;
+}
+
+.switch-input:checked~.switch-label:after {
+    opacity: 1;
+}
+
+.switch-handle {
+    position: absolute;
+    top: 2px;
+    left: 23px;
+    width: 20px;
+    height: 20px;
+    background-color: #E68513;
+    border-radius: 100%;
+}
+
+.switch-handle:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -6px 0 0 -6px;
+    width: 12px;
+    height: 12px;
+    background-color: #E68513;
+    border-radius: 6px;
+}
+
+.switch-input:checked~.switch-handle {
+    left: 57px;
+}
+
+.switch-label, .switch-handle {
+    transition: All 0.3s ease;
+    -webkit-transition: All 0.3s ease;
+    -moz-transition: All 0.3s ease;
+    -o-transition: All 0.3s ease;
+}
+
+/* Pricing Details page styles end */
+
+/* Features page styles start */
+
+.features {
+    margin-bottom: 50px;
+}
+
+.features .title-header h1 {
+    padding: 30px 0;
+    color: #E68513;
+    font-weight: 400;
+    margin: 0;
+}
+
+.features .desktop-delivery {
+    background: transparent linear-gradient(0deg, #acdb99 0%, #45a049 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 290px;
+    max-width: 48%;
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
+.features .desktop-delivery-content {
+    background: transparent url("../images/product-launch.png") no-repeat right bottom;
+    min-height: 230px;
+    color: #fff;
+    background-size: 55%;
+}
+
+.features h2 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 1.875rem;
+}
+
+.features ul {
+    margin: 0 0 30px 0;
+    padding: 0;
+}
+
+.features ul li {
+    list-style: none;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.features li img {
+    width: 14px;
+    height: 12px;
+    margin-right: 10px;
+}
+
+.features a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.features .mobile-delivery {
+    background: transparent linear-gradient(180deg, #FF8108 0%, #FFD25A 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 290px;
+    margin-left: 25px;
+    max-width: 48%;
+    margin-top: 50px;
+}
+
+.features .mobile-delivery-content {
+    background: transparent url(../images/mobile-delivery.png) no-repeat right 50px;
+    min-height: 260px;
+    color: #fff;
+    background-size: 52%;
+}
+
+.features .super-features {
+    background: transparent linear-gradient(1deg, #0068EC 0%, #00AAFA 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 295px;
+    margin: 50px 0;
+}
+
+.features .super-features-content {
+    background: transparent url(../images/super-features.png) no-repeat 70% bottom;
+    min-height: 285px;
+    color: #fff;
+    background-size: 40%;
+}
+
+.features .todo-list {
+    background: transparent linear-gradient(0deg, #1EDDB4 0%, #14C8CB 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 285px;
+    max-width: 48%;
+    margin-right: 20px;
+}
+
+.features .todo-list-content {
+    background: transparent url(../images/todo-list.png) no-repeat right bottom;
+    min-height: 235px;
+    color: #fff;
+    background-size: 50%;
+}
+
+.todo-list .carousel, .driver-app .carousel, .patient-mobile-app .carousel {
+    background: none;
+    height: auto;
+}
+
+.todo-list .carousel .carousel-item, .driver-app .carousel .carousel-item, .patient-mobile-app .carousel .carousel-item {
+    margin-top: 0;
+}
+
+.driver-app .carousel .carousel-item {
+    height: 600px;
+}
+
+.todo-list .carousel-indicators, .driver-app .carousel-indicators, .patient-mobile-app .carousel-indicators {
+    bottom: -20px;
+    margin: 0;
+}
+
+.features .patient-app {
+    background: transparent linear-gradient(180deg, #B852EA 0%, #712AFC 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 285px;
+    margin-left: 25px;
+    max-width: 48%;
+}
+
+.features .patient-app-content {
+    background: transparent url(../images/app-features.png) no-repeat right bottom;
+    min-height: 235px;
+    color: #fff;
+    background-size: 52%;
+}
+
+.features .remainder-card {
+    background: transparent linear-gradient(180deg, #b6aa84 0%, #dde692 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 285px;
+    max-width: 48%;
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
+.features .remainder-content {
+    background: transparent url(../images/reminder.png) no-repeat right bottom;
+    min-height: 235px;
+    color: #fff;
+    background-size: 32%;
+}
+
+.features .notification-card {
+    background: transparent linear-gradient(180deg, #0fbec4 0%, #81e1ee 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 285px;
+    max-width: 48%;
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+.features .notification-content {
+    background: transparent url(../images/notification.png) no-repeat right bottom;
+    min-height: 235px;
+    color: #fff;
+    background-size: 34%;
+}
+
+.features .live-updates-card {
+    background: transparent linear-gradient(180deg, #d1ce0f 0%, #eee781 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 285px;
+    max-width: 48%;
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
+.features .live-updates-content {
+    background: transparent url(../images/tracking.png) no-repeat right bottom;
+    min-height: 235px;
+    color: #fff;
+    background-size: 32%;
+}
+
+.features .master-report-card {
+    background: transparent linear-gradient(180deg, #df6d22 0%, #f3b395 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+    padding: 30px;
+    max-height: 285px;
+    max-width: 48%;
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+.features .master-report-content {
+    background: transparent url(../images/document.png) no-repeat right bottom;
+    min-height: 235px;
+    color: #fff;
+    background-size: 32%;
+}
+
+/* Features page styles end */
+
+/* Contact Us form styles start */
+
+.contactus .btn-primary {
+    border-color: #0077AB;
+    background-color: #0077AB;
+    height: 56px;
+    width: 60%;
+}
+
+.contactus .address .btn {
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 50px;
+    transition: 0.5s;
+    line-height: 1;
+    margin: 10px;
+    color: #fff;
+    background-color: #E68513;
+}
+
+.form-wrapper-outer {
+    padding: 20px;
+    border-radius: 8px;
+    margin: 0;
+    width: 80%;
+    border: 1px solid #DADCE0;
+}
+
+.form-wrapper-outer .form-logo {
+    margin: 0px auto 15px;
+    width: 100px;
+}
+
+.form-wrapper-outer .form-logo img {
+    width: 100%;
+}
+
+.form-greeting {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #E68513;
+}
+
+.form-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.field-wrapper {
+    position: relative;
+    margin-bottom: 0;
+}
+
+.firstname, .lastname {
+    width: 48%;
+}
+
+.firstname {
+    float: left;
+}
+
+.lastname {
+    float: right;
+}
+
+.field-wrapper input, .field-wrapper textarea {
+    border: 1px solid #DADCE0;
+    padding: 15px;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.field-wrapper .field-placeholder {
+    font-size: 16px;
+    position: absolute;
+    /* background: #fff; */
+    bottom: 34px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #80868b;
+    left: 5px;
+    padding: 0 8px;
+    -webkit-transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    text-align: left;
+    width: 100%;
+}
+
+.field-wrapper.textareafield .field-placeholder {
+    bottom: 94px;
+}
+
+.field-wrapper .field-placeholder span {
+    background: #ffffff;
+    padding: 0px 8px;
+}
+
+.field-wrapper input:not([disabled]):focus~.field-placeholder, .field-wrapper textarea:not([disabled]):focus~.field-placeholder {
+    color: #0077AB;
+}
+
+.field-wrapper input:not([disabled]):focus~.field-placeholder, .field-wrapper.hasValue input:not([disabled])~.field-placeholder, .field-wrapper textarea:not([disabled]):focus~.field-placeholder, .field-wrapper.hasValue textarea:not([disabled])~.field-placeholder {
+    -webkit-transform: scale(.75) translateY(-34px) translateX(-60px);
+    transform: scale(.75) translateY(-34px) translateX(-60px);
+}
+
+.field-wrapper.firstname input:not([disabled]):focus~.field-placeholder, .field-wrapper.hasValue.firstname input:not([disabled])~.field-placeholder, .field-wrapper.lastname input:not([disabled]):focus~.field-placeholder, .field-wrapper.hasValue.lastname input:not([disabled])~.field-placeholder {
+    -webkit-transform: scale(.75) translateY(-34px) translateX(-30px);
+    transform: scale(.75) translateY(-34px) translateX(-30px);
+}
+
+textarea {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+select {
+    border: 1px solid #DADCE0;
+    padding: 15px;
+    border-radius: 4px;
+    width: 100%;
+    height: 55px;
+    background-color: #fff;
+    font-size: 16px;
+}
+
+canvas {
+    background-color: #E68513;
+    font-size: 16px;
+    padding: 0 10px;
+    height: 56px;
+    border-radius: 4px;
+}
+
+.captcha {
+    float: left;
+    width: 40%;
+}
+
+.field-wrapper.captcha-input {
+    width: 60%;
+    display: inline-block;
+}
+
+.contactus .form-button {
+    margin-top: 0;
+}
+/* Contact Us form styles end */
+
+.homepage .todo-list, .homepage .driver-app, .homepage .patient-mobile-app {
+    padding: 8% 0 0;
+}
+.homepage .todo-list img {
+    width: 100%;
+    margin: 0 auto;
+    border: 15px solid #eee;
+    box-shadow: none;
+    padding-top: 5%;
+    height: 370px;
+}
+
+.homepage .driver-app .row {
+    width: 80%;
+}
+.homepage .driver-app img {
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+}
+.homepage .patient-mobile-app img {
+    border-radius: 25px;
+}
+
+@media (min-width: 1024px) {
+    .page {
+        height: 100vh;
+        scroll-snap-align: center;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        position: relative;
+    }
+}
+
+/* Tablet styles start */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .homepage .todo-list, .homepage .driver-app, .homepage .patient-mobile-app {
+        padding-bottom: 20px;
+        padding-top: 40px;
+    }
+    .homepage .driver-app img {
+        width: 80%;
+    }
+    header.container-fluid {
+        position: relative;
+    }
+    .page {
+        height: auto;
+        justify-content: flex-start;
+    }
+    .banner {
+        padding-top: 20px;
+    }
+    .banner-image {
+        border-bottom: 3px solid #0077AB;
+        margin: 0;
+        background: url(../images/home-banner.png) no-repeat center bottom;
+        height: 200px;
+        background-size: contain;
+    }
+    .banner-image .banner-text {
+        top: 10%;
+        left: 10%;
+    }
+    .banner-image h3 {
+        font-size: 1.3rem;
+        line-height: 2rem;
+    }
+    header {
+        padding-top: 20px;
+        height: 100px;
+    }
+    .homepage .btn {
+        font-size: 0.875rem;
+        padding: 10px;
+    }
+    .homepage nav {
+        padding: 10px 0;
+    }
+    .homepage nav a, .homepage .footer-nav a {
+        font-size: 0.875rem;
+    }
+    .homepage .logo img {
+        width: 180px;
+    }
+    .homepage nav ul li, .homepage .footer-nav ul li, .homepage .footer-social ul li {
+        margin-right: 10px;
+    }
+    .homepage .logo {
+        padding: 0;
+    }
+    .homepage .footer-nav {
+        float: none;
+        padding: 15px 0;
+    }
+    footer {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    footer .logo {
+        float: none;
+    }
+    .homepage .footer-nav ul {
+        margin-bottom: 0;
+    }
+    .homepage h1 {
+        font-size: 2rem;
+    }
+    .homepage p {
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+    }
+    .homepage .signup .signup-content p {
+        width: 90%;
+    }
+    .homepage .signup-boxes .color-box {
+        width: 30%;
+        height: 120px;
+        padding: 15px 10px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    .homepage .signup-boxes .color-box img {
+        width: 30px;
+    }
+    .homepage .signup-boxes .track-delivery img, .homepage .signup-boxes .home-delivery img {
+        width: 40px;
+    }
+    .homepage .repeat-click-steps {
+        padding: 0;
+        background: transparent url(../images/steps-line.png) no-repeat center 57%;
+    }
+    .homepage .store-locator-btn {
+        padding-top: 30px;
+    }
+    .homepage .download-app p, .homepage .facilities p {
+        width: 100%;
+    }
+    .homepage .app-store, .homepage .play-store, .homepage .store-locator {
+        background-size: 15%;
+        padding-left: 35px;
+    }
+    .homepage .store-locator {
+        background: #0077AB url("../images/store-locator-icon.png") no-repeat 10px center;
+        background-size: 13%;
+        padding-left: 35px;
+    }
+    .homepage .download-app .carousel {
+        height: 400px;
+    }
+    .homepage .download-app .carousel-inner {
+        width: 65%;
+    }
+    .homepage .carousel .carousel-item {
+        margin-top: 60px;
+    }
+    .homepage .signup, .homepage .how-it-works, .homepage .download-app, .homepage .how-to-repeate-click, .homepage .facilities {
+        padding: 30px 0;
+    }
+    .aboutus .pharmacy p, .aboutus .delivery-service p {
+        width: 100%;
+    }
+    .pricing-details .subscription .plan-details {
+        width: 80%;
+        padding: 20px 0;
+    }
+    .pricing-details .subscription .plan-items .plan-desc {
+        width: 85%;
+    }
+    .pricing-details .subscription .plan-items .plan-value {
+        width: 15%;
+    }
+    .features .desktop-delivery, .features .todo-list {
+        max-width: 100%;
+        margin-right: 0;
+        margin-top: 0;
+    }
+    .features .mobile-delivery, .features .patient-app {
+        max-width: 100%;
+        margin-top: 20px;
+        margin-left: 0;
+    }
+    .features .mobile-delivery-content {
+        background: transparent url(../images/mobile-delivery.png) no-repeat right 32px;
+        min-height: 260px;
+        color: #fff;
+        background-size: 42%;
+    }
+    .features .super-features {
+        margin: 20px 0;
+    }
+    .features .super-features-content {
+        background: transparent url(../images/super-features.png) no-repeat right bottom;
+        min-height: 265px;
+        background-size: 62%;
+    }
+    .features .todo-list-content {
+        background-size: 47%;
+        min-height: 250px;
+    }
+    .features .patient-app-content {
+        background-size: 52%;
+    }
+    .form-wrapper-outer {
+        width: 100%;
+    }
+    .homepage .signup .btn-blue {
+        margin-bottom: 15px;
+    }
+    .homepage .signup .signup-content {
+        text-align: center;
+    }
+    .homepage .driver-app .row {
+        width: 100%;
+    }
+    .homepage .driver-app .vertical-center {
+        text-align: center;
+    }
+    .homepage .driver-app-image {
+        margin: 0 auto;
+    }
+    .homepage .patient-mobile-app img {
+        width: 90%;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) and (orientation: landscape) {
+    .features .desktop-delivery, .features .todo-list {
+        max-width: 49%;
+        margin-right: 8px;
+        margin-top: 0;
+    }
+    .features .mobile-delivery, .features .patient-app {
+        max-width: 49%;
+        margin-top: 0;
+        margin-left: 8px;
+    }
+    .features .mobile-delivery-content {
+        background: transparent url(../images/mobile-delivery.png) no-repeat right bottom;
+        min-height: 268px;
+        background-size: 50%;
+    }
+    .features .super-features-content {
+        min-height: 265px;
+        background-size: 46%;
+        background: transparent url(../images/super-features.png) no-repeat 65% bottom;
+    }
+    .features .patient-app-content {
+        background-size: 46%;
+    }
+}
+
+/* Tablet styles end */
+
+/* Mobile styles start */
+
+@media (max-width: 767px) {
+    .homepage .signup, .homepage .how-it-works {
+        padding: 0;
+    }
+    .homepage .vertical-center {
+        text-align: center;
+        padding-bottom: 0;
+    }
+    .homepage .driver-app img {
+        width: 60%;
+    }
+    .banner-image .banner-text {
+        position: relative;
+        left: auto;
+        top: 0;
+        color: #fff;
+        text-align: center;
+    }
+    .banner-image {
+        border-bottom: 3px solid #0077AB;
+        margin: 0;
+        background: url(../images/home-banner.png) no-repeat center bottom;
+        height: 360px;
+        background-size: contain;
+        margin-bottom: 20px;
+    }
+    .banner-image h3 {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+    .hidden-xs {
+        display: none;
+    }
+    .visible-xs {
+        display: block;
+    }
+    .homepage .todo-list img {
+        box-shadow: none;
+        padding-top: 0;
+        margin: 10px auto;
+    }
+    .homepage header .login-btns {
+        padding: 0 0 20px;
+    }
+    .homepage nav {
+        float: none;
+        padding: 20px 0;
+    }
+    .homepage h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
+    .homepage p {
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+    .homepage .signup {
+        padding-top: 30px;
+    }
+    .homepage .signup .signup-content p {
+        width: 100%;
+    }
+    .homepage .signup-boxes {
+        justify-content: center;
+    }
+    .homepage .signup-boxes .color-box {
+        border-radius: 4px;
+        padding: 15px 8px 10px;
+        text-align: center;
+        width: 29%;
+        float: none;
+        height: 120px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+    .homepage .signup-boxes .color-box:first-child, .homepage .signup-boxes .color-box:nth-child(4) {
+        margin-left: 0;
+    }
+    .homepage .signup-boxes .color-box img {
+        width: 40px;
+        margin-bottom: 5px;
+    }
+    .homepage .signup-boxes .track-delivery img, .homepage .signup-boxes .home-delivery img {
+        width: 60px;
+        margin-top: 0;
+    }
+    .homepage .signup-boxes .color-box p {
+        color: #fff;
+        margin-bottom: 0;
+        font-size: 0.875rem;
+        line-height: normal;
+    }
+    .homepage .signup .signup-content {
+        margin-top: 0;
+        padding-bottom: 0;
+    }
+    .homepage .signup-boxes {
+        margin-top: 30px;
+    }
+    .homepage .btn {
+        color: #fff;
+        padding: 6px 15px;
+        width: auto;
+        font-size: 1rem;
+        min-width: auto;
+    }
+    .homepage .signup, .homepage .how-it-works, .homepage .download-app, .homepage .how-to-repeate-click {
+        text-align: center;
+        padding: 0;
+    }
+    .homepage .facilities {
+        text-align: center;
+    }
+    .homepage .how-it-works img {
+        max-width: 98%;
+    }
+    .homepage h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
+    .homepage .download-app p, .homepage .facilities p {
+        width: 100%;
+    }
+    .download-app .vertical-center {
+        padding-bottom: 30px;
+    }
+    .homepage .app-store {
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+    .homepage .download-app img {
+        width: 100%;
+    }
+    .homepage .play-store {
+        background: #4CAF50 url("../images/android-icon.png") no-repeat 15px center;
+    }
+    .homepage .app-store {
+        background: #333 url("../images/apple-icon.png") no-repeat 15px center;
+    }
+    .homepage .app-store, .homepage .play-store {
+        padding-left: 45px;
+        background-size: 15%;
+    }
+    .homepage .how-to-repeate-click h2 {
+        padding-bottom: 0;
+    }
+    .homepage .repeat-click-steps {
+        background: none;
+        padding-bottom: 0;
+    }
+    .repeat-click-steps .steps {
+        width: 33%;
+        margin: 0 auto;
+    }
+    .repeat-click-steps .steps p {
+        font-weight: 500;
+    }
+    .homepage .store-locator-btn {
+        padding-top: 0px;
+    }
+    .homepage .store-locator {
+        background: #ED8306 url("../images/store-locator-icon.png") no-repeat 15px center;
+        background-size: 15%;
+        padding-left: 50px;
+        margin-left: 15px;
+    }
+    .homepage .logo {
+        float: none;
+        text-align: center;
+    }
+    .homepage .footer-nav {
+        float: none;
+        padding: 20px 0 0;
+        text-align: center;
+    }
+    .homepage .footer-nav ul li {
+        line-height: 1.5rem;
+        margin: 0 5px;
+    }
+    .homepage .footer-social p.follow-us {
+        float: none;
+        margin-left: 0;
+    }
+    .homepage .footer-social ul li {
+        margin-top: 5px;
+    }
+    /* Mobile Navigation */
+    .homepage header nav a {
+        font-size: 1.2rem;
+    }
+    .homepage header nav ul {
+        padding-top: 0 !important;
+    }
+    .homepage header nav ul li {
+        margin-right: 0;
+        text-align: left;
+        padding-left: 35px !important;
+    }
+    .homepage .navbar {
+        padding: 0;
+        text-align: center;
+    }
+    .nav-item::before {
+        position: absolute;
+        display: block;
+        top: 20px;
+        left: 10px;
+        width: 12px;
+        height: 1px;
+        content: "";
+        border: none;
+        background-color: #000;
+    }
+    .homepage .navbar-light .navbar-brand {
+        padding: 20px 0;
+        margin: 0;
+    }
+    .homepage .navbar-brand img {
+        height: auto;
+        width: 180px;
+        display: block;
+        -webkit-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+    }
+    .homepage .navbar-toggler {
+        float: left;
+        border: none;
+        padding-top: 45px;
+        padding-right: 5px;
+    }
+    .homepage .navbar-toggler:active, .homepage .navbar-toggler:focus {
+        outline: none;
+    }
+    .homepage .navbar-light .navbar-toggler-icon {
+        width: 35px;
+        height: 17px;
+        background-image: none;
+        position: relative;
+        border-bottom: 1px solid #000;
+        transition: all 300ms linear;
+    }
+    .homepage .navbar-light .navbar-toggler-icon:after, .homepage .navbar-light .navbar-toggler-icon:before {
+        width: 35px;
+        position: absolute;
+        height: 1px;
+        background-color: #000;
+        top: 0;
+        left: 0;
+        content: '';
+        z-index: 2;
+        transition: all 300ms linear;
+    }
+    .homepage .navbar-light .navbar-toggler-icon:after {
+        top: 8px;
+    }
+    .homepage .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
+        transform: rotate(45deg);
+    }
+    .homepage .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
+        transform: translateY(8px) rotate(-45deg);
+    }
+    .homepage .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        border-color: transparent;
+    }
+    .homepage .nav-link {
+        color: #0077AB !important;
+        font-weight: 500;
+        transition: all 200ms linear;
+    }
+    .homepage .nav-item:hover .nav-link {
+        color: #E68513 !important;
+    }
+    .homepage .nav-item.active .nav-link {
+        color: #0077AB !important;
+    }
+    .homepage .nav-link {
+        position: relative;
+        padding: 5px 0 !important;
+        display: inline-block;
+    }
+    .homepage .nav-item:after {
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        content: '';
+        background-color: #0077AB;
+        opacity: 0;
+        transition: all 200ms linear;
+    }
+    .homepage .nav-item:hover:after {
+        bottom: 0;
+        opacity: 1;
+    }
+    .homepage .nav-item.active:hover:after {
+        opacity: 0;
+    }
+    .homepage .nav-item {
+        position: relative;
+        transition: all 200ms linear;
+    }
+    .homepage .repeat-click-steps .steps p {
+        margin-bottom: 20px;
+        padding-top: 0;
+    }
+    .homepage .carousel .carousel-item {
+        margin-top: 45px;
+    }
+    .aboutus .title-header h1 {
+        padding: 10px 0;
+    }
+    .aboutus .pharmacy p, .aboutus .delivery-service p, .aboutus .pharmacy img, .aboutus .delivery-service img {
+        width: 100%;
+    }
+    .aboutus .pharmacy, .aboutus .delivery-service {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .aboutus .pharmacy h2, .aboutus .delivery-service h2 {
+        text-align: center;
+    }
+    .aboutus .delivery-service h2 {
+        padding-bottom: 20px;
+    }
+    .pricing-details .title-header h1 {
+        padding: 10px 0;
+    }
+    .pricing-details .subscription {
+        width: 88%;
+    }
+    .pricing-details .subscription .plan-details {
+        width: 86%;
+        padding: 20px 0;
+    }
+    .pricing-details .subscription-details {
+        padding: 15px 0;
+    }
+    .pricing-details .subscription .plan-items .plan-desc {
+        width: 80%;
+    }
+    .pricing-details .subscription .plan-items .plan-value {
+        width: 20%;
+    }
+    .pricing-details .free-trail-btn {
+        text-align: center;
+        padding: 10px 0;
+    }
+    .pricing-details .subscription .plan-items {
+        margin-bottom: 10px;
+    }
+    .features {
+        margin-bottom: 0;
+    }
+    .features .title-header h1 {
+        padding: 10px 0;
+    }
+    .features .desktop-delivery, .features .mobile-delivery, .features .super-features, .features .todo-list, .features .patient-app {
+        padding: 20px;
+        max-width: 100%;
+        margin: 0 15px 15px;
+    }
+    .features .mobile-delivery-content {
+        background: transparent url(../images/mobile-delivery.png) no-repeat right bottom;
+        min-height: 278px;
+        background-size: 55%;
+    }
+    .features .super-features-content {
+        background: transparent url(../images/super-features.png) no-repeat right bottom;
+        background-size: 85%;
+    }
+    .features .todo-list-content {
+        min-height: 215px;
+        background-size: 60%;
+    }
+    .features .todo-list {
+        max-height: 240px;
+    }
+    .feedback {
+        padding: 30px 15px;
+    }
+    .form-wrapper-outer {
+        width: 100%;
+    }
+    .signup-content .btn {
+        margin: 0 auto 20px;
+    }
+    .signup-content .btn:last-child {
+        margin-bottom: 0;
+    }
+    .demo-btns {
+        text-align: center;
+    }
+    .aboutus .pharmacy, .aboutus .delivery-service, .contactus {
+        padding-top: 10px;
+        padding-bottom: 0;
+    }
+    h4 {
+        font-size: 1.25rem;
+    }
+    .homepage .driver-app .row {
+        width: 100%;
+        margin: 0;
+    }
+    .homepage .patient-mobile-app img {
+        width: 80%;
+        margin: 15px 0;
+    }
+    .homepage .driver-app .vertical-center {
+        text-align: center;
+    }
+    .homepage .driver-app-image {
+        margin: 0 auto;
+    }
+    .homepage .carousel {
+        height: 400px;
+    }
+}
+
+/* Mobile styles end */

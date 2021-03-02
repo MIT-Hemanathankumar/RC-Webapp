@@ -1,0 +1,136 @@
+<!doctype html>
+<html class="no-js h-100" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Borthpharma | About Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="styles/fontawesome.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/home.css" />
+
+</head>
+
+<body class="homepage">
+
+    <header class="container-fluid">
+
+        <div class="logo hidden-xs">
+            <a href="/"><img src="images/logo.png" alt="repeat click logo" /></a>
+        </div>
+
+        <nav class="hidden-xs">
+            <ul>
+                <li><a href="">How it Works</a></li>
+                <li><a href="">Pricing</a></li>
+                <li><a href="">Contact Us</a></li>
+                <li><button class="btn btn-blue" value="Login">Login</button></li>
+            </ul>
+        </nav>
+
+        <nav class="navbar navbar-expand-md navbar-light visible-xs">
+
+            <a href="#" class="navbar-brand"><img src="images/logo.png" alt="repeat click logo" /></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto py-4 py-md-0">
+                    <li class="nav-item pl-md-0 ml-0 ml-md-4">
+                        <a class="nav-link" href="#">How it Works</a>
+                    </li>
+                    <li class="nav-item pl-md-0 ml-0 ml-md-4">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item pl-md-0 ml-0 ml-md-4">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="login-btns text-center">
+                <button class="btn btn-blue" value="Login">Login</button>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <main class="aboutus">
+
+        <section class="container-fluid title-header">
+            <h1 class="text-center">About Us</h1>
+        </section>
+
+        <section class="container pharmacy">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <h2><span class="grey-txt">STAY LOCAL STAY SAFE</span></h2>
+                    <p>As a working pharmacist and pharmacy owner I am passionate about providing quality care to my patients. I am privileged and proud to be at the heart of the local community alongside the local GP practice. As with many important local businesses and pharmacy branches I am becoming increasingly concerned about the sustainability of local community pharmacies in addition to the safety of my patients as a result of new online pharmacies. While online pharmacies provide much needed convenience for patients, there are significant hidden risks to patient safety. One of the biggest challenges is related to partnership working between the patient, GP and pharmacist. Seamless and expert communication between all stakeholders is essential for patient safety and accountability. The development of Repeat Click is a solution to maintain communication, accountability, multi-partnership working, expertise and safety without compromising on convenience for the patient. I know patients want to support and protect their local community pharmacy and its sustainability. Such loyalty should not mean having to compromise on convenience. Repeat Click enables you to protect your Local Community Pharmacy and its vital role in the local economy. Loyal, safe, local and trusted with the ease of Repeat Click.</p>
+                    <p>Community Pharmacists deliver a wide range of services such as NHS Health Checks, smoking cessation, vaccinations, substance misuse services, sexual health screening, emergency contraception and many more. The Repeat Click AAP will keep you up to date regarding such services and appointments can be booked conveniently via the APP with teleconsultations available.</p>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <img src="images/about-pharmacy.png" alt="pharmacy app" />
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="container-fluid">
+        <div class="footer-nav">
+            <ul>
+                <li><a href="">How It Works</a></li>
+                <li><a href="">Affiliates</a></li>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Contact Us</a></li>
+                <li><a href="">Complaints Policy</a></li>
+                <li><a href="">Privacy Policy</a></li>
+                <li><a href="">Terms &amp; Conditions</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <p class="follow-us"><strong>Follow Us</strong></p>
+            <ul>
+                <li><a href=""><img src="images/facebook.png" alt="facebook"></a></li>
+                <li><a href=""><img src="images/instagram.png" alt="instagram"></a></li>
+                <li><a href=""><img src="images/youtube.png" alt="youtube"></a></li>
+                <li><a href=""><img src="images/twitter.png" alt="twitter"></a></li>
+                <li><a href=""><img src="images/linkedin.png" alt="linkedin"></a></li>
+            </ul>
+            <p class="copyright"><strong class="orange-txt">REPEAT CLICK</strong> Copyrights &copy; 2020. <br class="visible-xs" />All rights reserved.
+            </p>
+        </div>
+
+    </footer>
+    <a id="back-to-top" href="#" class="btn back-to-top" role="button"><img src="icons/arrow_circle_up.svg" alt="top arrow" /></a>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 550) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+            // scroll body to 0px on click
+            $('#back-to-top').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 400);
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

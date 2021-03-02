@@ -1,0 +1,62 @@
+.registration {
+    margin: 10% auto;
+    text-align: center;
+}
+.registration h1 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: bold;
+    letter-spacing: normal;
+}
+.registration .brand-logo {
+    margin: 20px auto 20px auto;
+    text-align: center;
+}
+.registration .brand-logo img {
+    width: 150px;
+    height: auto;
+}
+.registration select, .registration input[type="text"] {
+    background-color: #fff;
+    border: 1px solid #c1c1c1;
+    border-radius: 2px;
+    height: 60px;
+    width: 40%;
+    font-size: 1rem;
+    display: block;
+    margin: 0 auto 25px;
+    padding: 10px 20px;
+}
+.registration .registration-next-btn .btn-purple {
+    width: 38%;
+}
+.registration .personal-details-top,
+.registration .personal-details-bottom {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .registration select, .registration input[type="text"] {
+        width: 50%;
+    }
+    .registration .registration-next-btn .btn-purple {
+        width: 48%;
+    }
+}
+
+@media (max-width: 767px) {
+    .registration h1 {
+        font-size: 1.1rem;
+    }
+    .registration select, .registration input[type="text"] {
+        width: 85%;
+    }
+    .registration .registration-next-btn .btn-purple {
+        width: 80%;
+    }
+    .registration {
+        margin: 30% auto;
+    }
+}
